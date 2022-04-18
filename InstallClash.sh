@@ -20,7 +20,7 @@ plain='\033[0m'
 # Make sure run with root
 [[ $EUID -ne 0 ]] && echo -e "[${red}Errot${plain}]Please run this script with ROOT!" && exit 1
 
-read -p "Please enter your system: (macos/linux)" system
+read -p "Please enter your system(macos/linux): " system
 	[ -z "${system}" ]
 
 if [[ ${system} = "macos" ]]; then
@@ -49,3 +49,4 @@ if [[ ${systemname} = "darwin" ]]; then
 else
     mv clash-${systemname}-amd64-v3-${last_version} /usr/bin/clash
 fi
+
