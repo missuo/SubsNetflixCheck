@@ -7,11 +7,13 @@ A subscription link node Netflix unlock check tool
 - One Click All Detection
 
 ## Usage
-1. You Should install `Python 3` first.
+1. You Should install `Python 3` first. 
+
 **macOS**
 ~~~shell
 brew install python3
 ~~~
+
 **Linux**
 ~~~shell
 apt-get install python3 -y
