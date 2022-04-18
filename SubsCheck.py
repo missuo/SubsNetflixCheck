@@ -14,7 +14,7 @@ import os
 import psutil
 import sys
 
-subscriptionURL = ""
+subscriptionURL = input("Enter Your Subscription URL: ")
 
 def fetchSubsription(subscriptionURL):
 	print("Starting fetch subscription...")
