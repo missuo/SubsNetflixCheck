@@ -36,7 +36,7 @@ if [[ ! -n "$last_version" ]]; then
 fi
 echo -e "Latest version of Clash detected: ${last_version}, start installing..."
 
-wget -N --no-check-certificate -O clash-${systemname}-amd64-v3-{$last_version}.gz https://github.com/Dreamacro/clash/releases/download/${last_version}/clash-${systemname}-amd64-v3-{$last_version}.gz
+wget -N --no-check-certificate -O clash-${systemname}-amd64-v3-${last_version}.gz https://github.com/Dreamacro/clash/releases/download/${last_version}/clash-${systemname}-amd64-v3-{$last_version}.gz
 if [[ $? -ne 0 ]]; then
     echo -e "${red}Download failed, please check your network or try again later."
     exit 1
