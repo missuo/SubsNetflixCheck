@@ -8,13 +8,11 @@ A subscription link node Netflix unlock check tool
 
 ## Usage
 1. You Should install `Python 3` first. 
-
-**macOS**
+- **macOS**
 ~~~shell
 brew install python3
 ~~~
-
-**Linux**
+- **Linux**
 ~~~shell
 apt-get install python3 -y
 yum install python3 -y
