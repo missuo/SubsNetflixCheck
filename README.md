@@ -1,1 +1,1 @@
-# SubscriptionNetflixCheck
+# SubsNetflixCheck
