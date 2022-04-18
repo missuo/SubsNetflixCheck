@@ -78,7 +78,7 @@ def runClash():
 		print(IP)
 		print(nfStatus)
 		if(country != ""):
-			print("Netflix Country: ", country)
+			print("Netflix Unlock Country: ", country)
 		print("---------------------------\n")
 		time.sleep(3)
 
