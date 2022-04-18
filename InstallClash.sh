@@ -36,31 +36,16 @@ if [[ ! -n "$last_version" ]]; then
 fi
 echo -e "Latest version of Clash detected: ${last_version}, start installing..."
 
-wget -N --no-check-certificate -O clash-${systemname}-amd64-v3-${last_version}.gz https://github.com/Dreamacro/clash/releases/download/${last_version}/clash-${systemname}-amd64-v3-{$last_version}.gz
+wget -N --no-check-certificate -O clash-${systemname}-amd64-v3-${last_version}.gz https://github.com/Dreamacro/clash/releases/download/${last_version}/clash-${systemname}-amd64-v3-${last_version}.gz
 if [[ $? -ne 0 ]]; then
     echo -e "${red}Download failed, please check your network or try again later."
     exit 1
 fi
 echo -e "Download complete, start installing..."
-gzip -d clash-${systemname}-amd64-v3-{$last_version}.gz
+gzip -d clash-${systemname}-amd64-v3-${last_version}.gz
 
 if [[ ${systemname} = "darwin" ]]; then
-    mv clash-${systemname}-amd64-v3-{$last_version} /usr/local/bin/clash
+    mv clash-${systemname}-amd64-v3-${last_version} /usr/local/bin/clash
 else
-    mv clash-${systemname}-amd64-v3-{$last_version} /usr/bin/clash
+    mv clash-${systemname}-amd64-v3-${last_version} /usr/bin/clash
 fi
-
-read -p "Please enter your subscription URL" url
-	[ -z "${url}" ]
-
-sed -i "s/subscriptionURL =.*/subscriptionURL = \"${url}\"/g" ./SubsCheck.py
-echo -e "Subscription URL set to ${url}, start config Clash..."
-
-wget -N --no-check-certificate -O requirements.txt https://raw.githubusercontent.com/missuo/SubsNetflixCheck/main/requirements.txt
-wget -N --no-check-certificate -O config.yaml https://raw.githubusercontent.com/missuo/SubsNetflixCheck/main/config.yaml
-wget -N --no-check-certificate -O SubsCheck.py https://raw.githubusercontent.com/missuo/SubsNetflixCheck/main/SubsCheck.py
-
-echo -e "Config Clash complete, start installing requirements..."
-pip3 install -r requirements.txt
-echo -e "Requirements installed, starting check"
-python3 SubsCheck.py
