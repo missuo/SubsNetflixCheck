@@ -28,7 +28,7 @@ bash InstallClash.sh
 ~~~
 - Method 2 
 
--- [https://github.com/Dreamacro/clash/releases](https://github.com/Dreamacro/clash/releases) 
+ [https://github.com/Dreamacro/clash/releases](https://github.com/Dreamacro/clash/releases) 
 
 > Download `Clash` by yourself 
 
