@@ -1,0 +1,4 @@
+requests
+pysocks
+pyyaml
+psutil
