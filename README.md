@@ -5,6 +5,7 @@ A subscription link node Netflix unlock check tool
 - Support for displaying unlocked areas
 - No need to convert links yourself
 - One Click All Detection
+- Test results are saved in a file
 
 ## Usage
 1. You Should install `Python 3` first. 
@@ -46,7 +47,6 @@ python3 SubsCheck.py
 - Support more platforms
 - One-click deployment environment and running
 - Increase the judgment of oragins drama
-- Test results are saved in a file
 
 ## License
 [Apache-2.0 License](https://github.com/missuo/SubsNetflixCheck/blob/main/LICENSE)
