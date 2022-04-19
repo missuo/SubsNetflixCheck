@@ -4,6 +4,7 @@
 # @Time    : 2022/04/19 12:00
 # @GitHub  : github.com/missuo
 
+from cgitb import enable
 import requests
 import socks
 import socket
@@ -13,6 +14,7 @@ import time
 import os
 import psutil
 import sys
+import json
 
 subscriptionURL = input("Enter Your Subscription URL: ")
 
@@ -29,6 +31,7 @@ def fetchSubsription(subscriptionURL):
 	return nodeList, nodeListDict
 
 def runClash():
+	os.system('pkill -f "clash"')
 	# Fetch Subs Info
 	nodeList, nodeListDict = fetchSubsription(subscriptionURL)
 	
@@ -46,8 +49,12 @@ def runClash():
 	nodeNum = len(nodeList)
 	currentNode = 0
 	
+	checkResult = []
+	
+
 	# Loop
 	for node in nodeList:
+		nodeResult = {}
 		currentNode = currentNode + 1
 		print("Checking Node [{}/{}]".format(currentNode, nodeNum))
 		nodeName = node["name"]
@@ -60,29 +67,46 @@ def runClash():
 		yaml.safe_dump(currentClashConfigDict, currentClashFile, default_flow_style=False, allow_unicode=True)
 		currentClashFile.close()
 		
-		clashLog = open("./clashLog", 'w+')
+		clashLog = open("./clashLog", 'a+')
 		
 		clashRuner = subprocess.Popen("clash -f newConfig.yaml", shell=True, stdout = clashLog,  preexec_fn = os.setsid)
 		time.sleep(2)
 		startProxy()
-		IP = getIPInfo()
-		if(IP == ""):
-			print("Node Time Out!\n")
+		IPAddress = getIPInfo()
+		if(IPAddress == ""):
+			print("Name:", nodeName)
+			print("\nNode Time Out! Pass...")
+			print("---------------------------\n")
 			time.sleep(3)
 			kill(clashRuner.pid)
 			continue
 		nfRetCode, nfStatus, country = nfCheck()
-		print("Node Name:")
-		print(nodeName)
-		print("Node IP:")
-		print(IP)
+		nodeResult["name"] = nodeName
+		nodeResult["ip"] = IPAddress.replace("\n", "")
+		if(nfRetCode ==200):
+			unlock = "yes"
+		else:
+			unlock = "no"
+		nodeResult["unlock"] = unlock
+		nodeResult["country"] = country
+		checkResult.append(nodeResult)
+		print("Name:", nodeName)
+		print("IP:", IPAddress)
 		print(nfStatus)
 		if(country != ""):
 			print("Netflix Unlock Country: ", country)
 		print("---------------------------\n")
 		time.sleep(3)
-
 		kill(clashRuner.pid)
+	resultFileName = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()) + ".json"
+	resultFile = open(resultFileName, 'w')
+	resultJSON = json.dumps(checkResult, indent=4, ensure_ascii=False)
+	resultFile.write(resultJSON)
+	# yaml.safe_dump(checkResult, resultFile, default_flow_style=False, allow_unicode=True)
+	resultFile.close()
+	print("Check Result is saved into ./{}".format(resultFileName))
+	print("Thanks for using SubsCheck :)")
+
 	
 def kill(proc_pid):
 	process = psutil.Process(proc_pid)
