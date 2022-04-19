@@ -1,5 +1,5 @@
 # SubsNetflixCheck
-A subscription link node Netflix unlock check tool
+A subscription link node Netflix unlock check tool. (Support for macOS and Linux)
 
 ## Features
 - Support for displaying unlocked areas
