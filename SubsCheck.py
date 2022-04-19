@@ -4,7 +4,6 @@
 # @Time    : 2022/04/19 12:00
 # @GitHub  : github.com/missuo
 
-from cgitb import enable
 import requests
 import socks
 import socket
